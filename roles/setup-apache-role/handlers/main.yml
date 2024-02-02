@@ -1,0 +1,8 @@
+---
+# handlers file for setup-apache-role
+- name: start "{{pkg}}"
+  service:
+    name: "{{pkg}}"
+    state: started
+
+

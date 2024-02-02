@@ -1,0 +1,43 @@
+---
+- name: Playbook to install tomcat
+  hosts: all
+  become: true
+  tasks:
+  - name: update all packages
+    yum:
+      name: '*'
+      state: latest
+
+  - name: install java in redhat
+    yum:
+      name: java-11*
+      state: installed
+    when: ansible_os_family == "Redhat"
+
+  - name: install java in Debian
+    yum:
+      name: default-jdk
+      state: present
+    when: ansible_os_family == "Debian"
+
+  - name: Download tomcat
+    get_url:
+      url: https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.98/bin/apache-tomcat-8.5.98.tar.gz
+      dest: /opt
+
+  - name: Extract tomcat
+    unarchive:
+      src: /opt/apache-tomcat-8.5.98.tar.gz
+      dest: /opt/
+      remote_src: true
+
+  - name: Change permissions
+    file:
+      path: /opt/apache-tomcat-8.5.98/bin/startup.sh
+      mode: 0777
+
+  - name: start tomcat
+    shell: nohup ./startup.sh
+    args:
+        chdir: /opt/apache-tomcat-8.5.98/bin/ 
+        

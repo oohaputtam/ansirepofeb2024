@@ -1,0 +1,15 @@
+---
+ - name: Playbook to  multipleusers
+   hosts: all
+   become: true
+   tasks:
+   - name: multi users
+     yum: 
+       name: '{{item}}'
+       state: present
+     with_items:
+       - git
+       - tree
+       - docker
+       - gcc
+...

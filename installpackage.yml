@@ -1,0 +1,10 @@
+---
+ - name: Playbook to install package git
+   hosts: all
+   become: true
+   tasks:
+   - name: installing git
+     yum:
+       pkg: git
+       state: installed
+...

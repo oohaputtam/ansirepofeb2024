@@ -1,0 +1,15 @@
+---
+ - name: Playbook to create a file inside directory
+   hosts: all
+   become: true
+   tasks:
+   - name: create dir
+     file:
+       path: /home/ansadmin/dir2
+       state: directory
+         
+   - name: create file in dir
+     file:
+       path: /home/ansadmin/dir2/devopsfile
+       state: touch
+...

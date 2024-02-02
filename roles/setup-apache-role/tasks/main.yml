@@ -1,0 +1,13 @@
+---
+# tasks file for setup-apache-role
+ - name: install package "{{pkg}}"
+   yum:
+     name: "{{pkg}}"
+     state: present
+   notify: start "{{pkg}}"
+
+ - name: copy index.html file
+   copy:
+     src: /home/ansadmin/index.html
+     dest: /var/www/html/
+...

@@ -1,0 +1,8 @@
+---
+ - name: playbook to create user once more using other method
+   hosts: all
+   become: true
+   tasks:
+   - name: create user
+     user: name=zoom
+...
